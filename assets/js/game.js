@@ -42,12 +42,20 @@ var fightOrSkip = function() {
 
 // fight function (now with parameter for enemy's name)
 var fight = function(enemy) {
+  // keep track who goes first
+  var isPlayerTurn = true;
+
+  // randomly change turn order
+  if (Math.random() > 0.5) {
+    isPlayerTurn = false;
+  }
+
   // repeat and execute as long as the enemy-robot is alive
   while (playerInfo.health > 0 && enemy.health > 0) {
     if (fightOrSkip()) {
       // if true, leave fight by breakign loop
       break;
-    } 
+    }
 
     // remove enemy's health by subtracting the amount set in the playerAttack variable
     // generate random damage value based on player's attack power
@@ -88,6 +96,8 @@ var fight = function(enemy) {
     }else {
       window.alert(playerInfo.name + ' still has ' + playerInfo.health + ' health left.');
     }
+    // switch turn order for the next order
+    isPlayerTurn = !isPlayerTurn;
   }
 };
 
